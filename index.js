@@ -174,8 +174,9 @@ BloomFilter.prototype.fromBuffer = function fromBuffer(buf)
 	var ptr = 0;
 
 	const version = buf.readUInt8(ptr++);
-
 	// SWITCH ON VERSION HERE if necessary
+	if (version !== BloomFilter.VERSION)
+		return;
 
 	this.bits = buf.readUIntLE(ptr, 6);
 	ptr += 6;
