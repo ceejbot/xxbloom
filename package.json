@@ -1,0 +1,39 @@
+{
+  "name": "xxbloom",
+  "description": "Yet another Bloom filter implementation, this one with xxhashjs",
+  "version": "1.0.0",
+  "author": "C J Silverio <ceejceej@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/ceejbot/xxbloom/issues"
+  },
+  "dependencies": {
+    "xxhashjs": "~0.2.1"
+  },
+  "devDependencies": {
+    "coveralls": "~2.13.1",
+    "eslint-config-ceejbot": "~1.1.0",
+    "mocha": "~3.5.3",
+    "must": "~0.13.4",
+    "nyc": "~11.2.1",
+    "xo": "~0.18.2"
+  },
+  "homepage": "https://github.com/ceejbot/xxbloom#readme",
+  "keywords": [
+    "bloom",
+    "bloom filter",
+    "xxhash"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceejbot/xxbloom.git"
+  },
+  "scripts": {
+    "lint": "xo",
+    "test": "nyc mocha -R spec"
+  },
+  "xo": {
+    "extends": "eslint-config-ceejbot"
+  }
+}
