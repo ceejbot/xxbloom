@@ -30,8 +30,11 @@
     "url": "git+https://github.com/ceejbot/xxbloom.git"
   },
   "scripts": {
-    "lint": "xo",
-    "test": "nyc mocha -R spec"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "mocha -R spec",
+    "test:cov": "nyc mocha -R spec",
+    "test:style": "xo",
+    "test:travis": "npm run test:cov && npm run test:style"
   },
   "xo": {
     "extends": "eslint-config-ceejbot"
