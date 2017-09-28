@@ -143,6 +143,8 @@ BloomFilter.prototype.has = function has(item)
 	return true;
 };
 
+BloomFilter.VERSION = 1;
+
 BloomFilter.prototype.toBuffer = function toBuffer()
 {
 	// Wireline format is: a buffer structured in the following manner:
@@ -151,9 +153,10 @@ BloomFilter.prototype.toBuffer = function toBuffer()
 	// followed by N x uint 32 LE seeds
 	// remainder of buffer is the filter data
 	// Note the fragility to change but also the brute-headed compactness.
-	const buf = Buffer.alloc(6 + 1 + this.seeds.length * 4 + this.buffer.length);
+	const buf = Buffer.alloc(1 + 6 + 1 + this.seeds.length * 4 + this.buffer.length);
 
 	var ptr = 0;
+	buf.writeUInt8(BloomFilter.VERSION, ptr++);
 	buf.writeUIntLE(this.bits, ptr, 6);
 	ptr += 6;
 	buf.writeUInt8(this.seeds.length, ptr++);
@@ -169,6 +172,11 @@ BloomFilter.prototype.toBuffer = function toBuffer()
 BloomFilter.prototype.fromBuffer = function fromBuffer(buf)
 {
 	var ptr = 0;
+
+	const version = buf.readUInt8(ptr++);
+
+	// SWITCH ON VERSION HERE if necessary
+
 	this.bits = buf.readUIntLE(ptr, 6);
 	ptr += 6;
 
@@ -179,6 +187,6 @@ BloomFilter.prototype.fromBuffer = function fromBuffer(buf)
 		this.seeds[i] = buf.readUInt32LE(ptr);
 	}
 
-	this.buffer = Buffer.alloc(buf.length - 7 - (4 * seedcount));
+	this.buffer = Buffer.alloc(buf.length - 8 - (4 * seedcount));
 	buf.copy(this.buffer, 0, ptr);
 };

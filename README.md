@@ -1,4 +1,4 @@
-Yet another Bloom filter implementation for node.js. Everybody has to write one, as you know. Backed by [Xxhash](https://code.google.com/p/xxhash/) via [node-xxhash](https://github.com/pierrec/js-xxhash). Xxhash is a fast general-purpose hash, which is all a bloom filter needs.
+Yet another Bloom filter implementation for node.js. Everybody has to write one, as you know. Backed by [Xxhash](https://code.google.com/p/xxhash/) via [xxhashjs](https://github.com/pierrec/js-xxhash). Xxhash is a fast general-purpose hash, which is all a bloom filter needs.
 
 To install: `npm install xxbloom`
 

@@ -231,15 +231,16 @@ describe('BloomFilter()', () =>
 			filter.add(['cat', 'dog', 'wallaby']);
 			var buf = filter.toBuffer();
 
-			buf.readUIntLE(0, 6).must.equal(128);
-			buf.readUInt8(6).must.equal(3);
-			buf.readUInt32LE(7).must.equal(filter.seeds[0]);
-			buf.readUInt32LE(11).must.equal(filter.seeds[1]);
-			buf.readUInt32LE(15).must.equal(filter.seeds[2]);
+			buf.readUInt8(0).must.equal(BloomFilter.VERSION);
+			buf.readUIntLE(1, 6).must.equal(128);
+			buf.readUInt8(7).must.equal(3);
+			buf.readUInt32LE(8).must.equal(filter.seeds[0]);
+			buf.readUInt32LE(12).must.equal(filter.seeds[1]);
+			buf.readUInt32LE(16).must.equal(filter.seeds[2]);
 
 			for (var i = 0; i < filter.buffer.length; i++)
 			{
-				buf[i + 19].must.equal(filter.buffer[i]);
+				buf[i + 20].must.equal(filter.buffer[i]);
 			}
 		});
 
